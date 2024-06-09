@@ -62,6 +62,7 @@ main {
   margin-top: 80px;
   align-items: center;
 }
+/* Main block 1 */
 .mainBlock1{
   display: grid;
   grid-template-columns: 1fr 0.7fr;
@@ -123,9 +124,6 @@ main {
 }
 .circle{
   position: absolute;
-  width: 70px;
-  height: 70px;
-  background-color: #FFDDD2;
   border-radius: 50%;
 }
 .chartBlock{
@@ -169,6 +167,7 @@ main {
   background-color: #BEE1E6;
   border-radius: 50%;
 }
+/* Main block 2 styles*/
 .mainBlock2{
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -203,7 +202,7 @@ main {
   text-align: center;
 }
 
-/* Main block 3 */
+/* Main block 3 styles*/
 .mainBlock3{
   display: flex;
   flex-direction: column;
@@ -216,17 +215,32 @@ main {
   gap: 50px;
 }
 .productCard{
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 10px;
   align-items: center;
   border: solid 1px #E4E7EC;
   border-radius: 8px;
   padding: 16px;
-  padding-top: 50px;
+  padding-top: 40px;
+}
+.discount{
+  display: none;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 12px;
+  background-color: #101828;
+  color: white;
+  border-radius: 20px;
+  padding-block: 4px;
+  padding-inline: 10px;
 }
 .productCardImg{
   width: 50%;
+  height: 50%;
 }
 .brandName{
   color: #98A2B3;
@@ -261,5 +275,4 @@ main {
   background-color: rgb(25, 136, 146);
   color: white;
 }
-/* Main block 3 */
 /* Main styles */

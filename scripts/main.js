@@ -40,7 +40,8 @@ createSmallProductCards();
 const productCards = [
     {
         id: 0,
-        imgSrc: "./mainImg/productCardImg1.png",
+        discount: "",
+        imgSrc: "./mainImg/productCardImg1.svg",
         brandName: "Sony",
         productName: "4K TV Game Mini Arcade Rocker Console 32GB/64GB",
         estimation: 4,
@@ -48,59 +49,102 @@ const productCards = [
     },
     {
         id: 1,
-        imgSrc: "./mainImg/productCardImg1.png",
-        brandName: "Sony",
-        productName: "4K TV Game Mini Arcade Rocker Console 32GB/64GB",
+        discount: "",
+        imgSrc: "./mainImg/productCardImg2.svg",
+        brandName: "Google",
+        productName: "Cancelling Headset Music Sport Deep Bass",
+        estimation: 3,
+        productPrice: "$39.80"
+    },
+    {
+        id: 2,
+        discount: "-15%",
+        imgSrc: "./mainImg/productCardImg3.svg",
+        brandName: "Apple",
+        productName: "T500BT Original Wireless Bluetooth Headphone",
+        estimation: 5,
+        productPrice: "$69.80"
+    },
+    {
+        id: 3,
+        discount: "-20%",
+        imgSrc: "./mainImg/productCardImg4.svg",
+        brandName: "Toshiba",
+        productName: "Black Walnut Wood & Aluminum Headphone Stand",
+        estimation: 4,
+        productPrice: "$70.80"
+    },
+    {
+        id: 4,
+        discount: "-10%",
+        imgSrc: "./mainImg/productCardImg5.svg",
+        brandName: "BassX",
+        productName: "Beats Studio3 Wireless Bluetooth Headphones",
         estimation: 3,
         productPrice: "$29.80"
     },
     {
-        id: 2,
-        imgSrc: "./mainImg/productCardImg1.png",
-        brandName: "Sony",
-        productName: "4K TV Game Mini Arcade Rocker Console 32GB/64GB",
-        estimation: 2,
-        productPrice: "$29.80"
-    },
-    {
-        id: 3,
-        imgSrc: "./mainImg/productCardImg1.png",
-        brandName: "Sony",
-        productName: "4K TV Game Mini Arcade Rocker Console 32GB/64GB",
-        estimation: 5,
-        productPrice: "$29.80"
-    },
-    {
-        id: 4,
-        imgSrc: "./mainImg/productCardImg1.png",
-        brandName: "Sony",
-        productName: "4K TV Game Mini Arcade Rocker Console 32GB/64GB",
-        estimation: 5,
-        productPrice: "$29.80"
-    },
-    {
         id: 5,
-        imgSrc: "./mainImg/productCardImg1.png",
-        brandName: "Sony",
-        productName: "4K TV Game Mini Arcade Rocker Console 32GB/64GB",
+        discount: "-15%",
+        imgSrc: "./mainImg/productCardImg6.svg",
+        brandName: "Konika",
+        productName: "Marshall MAJOR III Wireless Folding Bluetooth",
         estimation: 5,
-        productPrice: "$29.80"
+        productPrice: "$39.80"
     },
     {
         id: 6,
-        imgSrc: "./mainImg/productCardImg1.png",
-        brandName: "Sony",
-        productName: "4K TV Game Mini Arcade Rocker Console 32GB/64GB",
-        estimation: 5,
-        productPrice: "$29.80"
+        discount: "",
+        imgSrc: "./mainImg/productCardImg7.svg",
+        brandName: "Apple",
+        productName: "T500BT Original Wireless Bluetooth Headphone",
+        estimation: 4,
+        productPrice: "$69.80"
     },
     {
         id: 7,
-        imgSrc: "./mainImg/productCardImg1.png",
-        brandName: "Sony",
-        productName: "4K TV Game Mini Arcade Rocker Console 32GB/64GB",
-        estimation: 5,
+        discount: "",
+        imgSrc: "./mainImg/productCardImg8.svg",
+        brandName: "Toshiba",
+        productName: "Black Walnut Wood & Aluminum Headphone Stand",
+        estimation: 4,
+        productPrice: "$70.80"
+    },
+    {
+        id: 8,
+        discount: "",
+        imgSrc: "./mainImg/productCardImg9.svg",
+        brandName: "BassX",
+        productName: "Beats Studio3 Wireless Bluetooth Headphones",
+        estimation: 4,
         productPrice: "$29.80"
+    },
+    {
+        id: 9,
+        discount: "",
+        imgSrc: "./mainImg/productCardImg10.svg",
+        brandName: "Konika",
+        productName: "Marshall MAJOR III Wireless Folding Bluetooth",
+        estimation: 4,
+        productPrice: "$39.80"
+    },
+    {
+        id: 10,
+        discount: "-25%",
+        imgSrc: "./mainImg/productCardImg11.svg",
+        brandName: "Apple",
+        productName: "T500BT Original Wireless Bluetooth Headphone",
+        estimation: 5,
+        productPrice: "$70.80"
+    },
+    {
+        id: 11,
+        discount: "",
+        imgSrc: "./mainImg/productCardImg12.svg",
+        brandName: "Toshiba",
+        productName: "Black Walnut Wood & Aluminum Headphone Stand",
+        estimation: 3,
+        productPrice: "$70.80"
     },
 ];
 
@@ -109,7 +153,8 @@ function createProductCard(){
         const productCard = document.createElement("div");
         productCard.className = "productCard";
         productCard.id = `productCard${i}`;
-        productCard.innerHTML = `   <img class="productCardImg" src="${productCards[i].imgSrc}" alt="">
+        productCard.innerHTML = `   <div class="discount" id="discount${i}">${productCards[i].discount}</div>
+                                    <img class="productCardImg" src="${productCards[i].imgSrc}" alt="">
                                     <div class="productCardMain">
                                         <p class="brandName">${productCards[i].brandName}</p>
                                         <p class="productName">${productCards[i].productName}</p>
@@ -120,6 +165,11 @@ function createProductCard(){
                                         <button class="addBtn">Add +</button>
                                     </div>`;
         document.querySelector(".productCardsСontainer").appendChild(productCard);
+
+        const discount = document.getElementById(`discount${i}`);
+        if(productCards[i].discount != ""){
+            discount.style.display = "flex";
+        }
 
         const estimationBlock = document.getElementById(`estimationBlock${i}`);
         console.log(productCards[i].estimation);
