@@ -37,7 +37,7 @@ function createSmallProductCards(){
 createSmallProductCards();
 
 // Create product cards
-const productCards = [
+const products = [
     {
         id: 0,
         discount: "",
@@ -149,36 +149,86 @@ const productCards = [
 ];
 
 function createProductCard(){
-    for(let i = 0; i < productCards.length; i++){
+    for(let i = 0; i < products.length; i++){
         const productCard = document.createElement("div");
         productCard.className = "productCard";
         productCard.id = `productCard${i}`;
-        productCard.innerHTML = `   <div class="discount" id="discount${i}">${productCards[i].discount}</div>
-                                    <img class="productCardImg" src="${productCards[i].imgSrc}" alt="">
+        productCard.innerHTML = `   <div class="discount" id="discount${i}">${products[i].discount}</div>
+                                    <img class="productCardImg" src="${products[i].imgSrc}" alt="">
                                     <div class="productCardMain">
-                                        <p class="brandName">${productCards[i].brandName}</p>
-                                        <p class="productName">${productCards[i].productName}</p>
+                                        <p class="brandName">${products[i].brandName}</p>
+                                        <p class="productName">${products[i].productName}</p>
                                         <div class="estimationBlock" id="estimationBlock${i}"></div>
                                     </div>
                                     <div class="productCardFooter">
-                                        <span class="productPrice">${productCards[i].productPrice}</span>
-                                        <button class="addBtn">Add +</button>
+                                        <span class="productPrice">${products[i].productPrice}</span>
+                                        <button class="addBtn" id="addBtn${i}">Add +</button>
                                     </div>`;
         document.querySelector(".productCardsСontainer").appendChild(productCard);
 
         const discount = document.getElementById(`discount${i}`);
-        if(productCards[i].discount != ""){
+        if(products[i].discount != ""){
             discount.style.display = "flex";
         }
 
         const estimationBlock = document.getElementById(`estimationBlock${i}`);
-        console.log(productCards[i].estimation);
-        for(let a = 0; a < productCards[i].estimation; a++){
+        for(let a = 0; a < products[i].estimation; a++){
             estimationBlock.innerHTML += '<img src="./mainImg/yellowStar.svg" alt="">';
         }
-        for(let b = 5 - productCards[i].estimation; b > 0; b--){
+        for(let b = 5 - products[i].estimation; b > 0; b--){
             estimationBlock.innerHTML += '<img src="./mainImg/grayStar.svg" alt="">';
         }
     }
 };
-createProductCard()
+createProductCard();
+
+
+// Basket
+
+let basketProducts;
+
+const addBtns = document.querySelectorAll(".addBtn");
+addBtns.forEach((btn) => {
+  if (localStorage.getItem("basketProducts")) {
+    basketProducts = JSON.parse(localStorage.getItem("basketProducts"));
+  } else {
+    basketProducts = [];
+  }
+  btn.addEventListener("click", (event) => {
+    const cardId = event.target.id.substring(6, 8);
+    let check = false;
+    for (let i = 0; i < basketProducts.length; i++) {
+      if (basketProducts[i].productName == products[cardId].productName) {
+        basketProducts[i].quantity++;
+        localStorage.setItem("basketProducts", JSON.stringify(basketProducts));
+        notification();
+        check = true;
+      }
+    }
+    if (!check) {
+      products[cardId].quantity = 1;
+      basketProducts.push(products[cardId]);
+      localStorage.setItem("basketProducts", JSON.stringify(basketProducts));
+      notification();
+    }
+  });
+});
+
+function notification() {
+  const notificationBlock = document.createElement("div");
+  notificationBlock.className = "notificationBlock";
+  notificationBlock.innerHTML = "Товар добавлен в корзину";
+  setTimeout(() => {
+    notificationBlock.style.top = "20px";
+  }, 200);
+  setTimeout(() => {
+    notificationBlock.style.top = "80px";
+    notificationBlock.style.opacity = 0;
+    setTimeout(() => {
+      document.body.removeChild(notificationBlock);
+    }, 400);
+  }, 900);
+  document.body.appendChild(notificationBlock);
+}
+
+

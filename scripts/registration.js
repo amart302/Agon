@@ -1,53 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>регистрация</title>
-    <link rel="stylesheet" href="registration.css">
-</head>
-<body>
-    <div class="container">
-        <div class="tabs">
-          <div id="btn"></div>
-          <button type="button" id="entrance" class="toggle-btn" onclick="login()">Log In</button>
-          <button type="button"  id="registration" class="toggle-btn" onclick="registrationn()">Register</button>
-        </div>
-    
-        <form id="entranceForm" class="form">
-          <input type="text" class="input-filed" id="entranceUsername" name="username" required placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ">
-          <input type="text" class="input-filed" placeholder="ПАРОЛЬ"  name="password" id="entrancePassword" required>
-          <input type="checkbox" class="check-box"><span>ЗАПОМНИТЬ МЕНЯ</span>
-          <button type="submit" class="submit-btn">ВОЙТИ</button>
-          <span id="entranceError"></span>
-        </form>  
-    
-        <form id="registForm" class="form">
-          <input type="text" class="input-filed" name="username" placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ" id="registUsername"  required>
-          <input type="text" class="input-filed" name="email" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" id="registEmail" required >
-          <input type="text" class="input-filed" name="password" placeholder="ПАРОЛЬ" id="registPassword" required >
-          <input type="checkbox" class="check-box"><span class="sogl">Я СОГЛАСЕН С МНЕНИЕМ МИЛАНЫ</span>
-          <button type="submit" class="submit-btn" >ЗАРЕГЕСТИРОВАТЬСЯ</button>
-        </form>
-      </div>
+const registerWindowParent = document.querySelector(".registerWindowParent");
 
 
+const userBlocks = document.querySelectorAll(".user");
+userBlocks.forEach(user => {
+    user.addEventListener("click", () => {
+        registerWindowParent.style.display = "flex";
+        setTimeout(() => {
+            registerWindowParent.style.opacity = 1;
+        }, 200)
+    });
+})
 
-      <div id="modal" class="modal">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h2>НЕВЕРНЫЙ ПАРОЛЬ</h2>
-          </div>
-          <div class="modal-body">
-            <p>ПАРОЛЬ ХЬАДАГ ДИЙХАЧ ХЬАВОАГ1АГ ВА ХЬО</p>
-          </div>
-          <div class="modal-footer">
-            <button class="modal-button">ЗАКРЫТЬ</button>
-          </div>
-        </div>
-      </div>
-</body>
-<script>
+
+const createAccBtn = document.querySelector(".createAccBtn");
+createAccBtn.addEventListener("click", () => {
+    logIn.style.left = "-400px";
+    register.style.left = "50px";
+    button.style.left = "110px";
+
+    registerWindowParent.style.display = "flex";
+    setTimeout(() => {
+        registerWindowParent.style.opacity = 1;
+    })
+})
+
+const closeWindow = document.querySelector(".closeWindow");
+closeWindow.addEventListener("click", () => {
+    setTimeout(() => {
+        registerWindowParent.style.opacity = 0;
+        setTimeout(() => {
+            registerWindowParent.style.display = "none";
+        }, 200)
+    }, 100)
+})
+
+const user = document.querySelectorAll(".username");
+if(sessionStorage.getItem("username")){
+    user[0].innerHTML = sessionStorage.getItem("username");
+    user[1].innerHTML = sessionStorage.getItem("username");
+};
+
 
 const modal = document.getElementById("modal");
 const modalButton = document.querySelector(".modal-button");
@@ -55,11 +47,17 @@ const modalButton = document.querySelector(".modal-button");
 // Показать модальное окно
 function showModal() {
   modal.style.display = "block";
+  setTimeout(() => {
+    modal.style.opacity = 1;
+  }, 200)
 }
 
 // Скрыть модальное окно
 function hideModal() {
-  modal.style.display = "none";
+  modal.style.opacity = 0;
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 200)
 }
 
 
@@ -100,7 +98,7 @@ const users = [];
 const registUsername = document.getElementById("registUsername");
 const registEmail = document.getElementById("registEmail");
 const registPassword = document.getElementById("registPassword");
-const registError = document.getElementById("registError");
+const registError = document.getElementById("entranceError");
 
 function addUser() {
         const localUsers = JSON.parse(localStorage.getItem("users"));
@@ -137,7 +135,7 @@ function addUser() {
           alert(`Регистрация успешна! \n \n Имя пользователя: ${registUsername.value} \n Email: ${registEmail.value}`);
           userName = registUsername.value
 
-          window.location.href = "./Main/main.html";
+          location.reload();
           sessionStorage.setItem("username", userName);
 
           localStorage.setItem("users", JSON.stringify(localUsers));
@@ -152,6 +150,13 @@ function addUser() {
           const localUsers = JSON.parse(localStorage.getItem("users"));
           if (!localUsers) {
             addUser();
+
+            setTimeout(() => {
+                registerWindowParent.style.opacity = 0;
+                setTimeout(() => {
+                    registerWindowParent.style.display = "none";
+                }, 200)
+            }, 800)
           } else {
             let checkUser = false;
             for (let i = 0; i < localUsers.length; i++) {
@@ -162,6 +167,13 @@ function addUser() {
             }
             if (!checkUser) {
               addUser();
+
+              setTimeout(() => {
+                registerWindowParent.style.opacity = 0;
+                setTimeout(() => {
+                    registerWindowParent.style.display = "none";
+                }, 200)
+              }, 800)
             }
           }
         });
@@ -185,20 +197,31 @@ function addUser() {
               ) {
                 checkUser = true;
                 userName = entranceUsername.value;
+                user[0].innerHTML = localUsers[i].username;
+                user[1].innerHTML = localUsers[i].username;
+                sessionStorage.setItem("username", userName);
+                
               }
             }
             if (checkUser) {
-            window.location.href = "./Main/main.html";
             sessionStorage.setItem("username", userName);
 
+            alert("Успешный вход");
+
+            sessionStorage.setItem("entrance", true);
             entranceError.innerHTML = "";
             registError.innerHTML = "";
             document.getElementById("entranceForm").reset();
             document.getElementById("registForm").reset();
+
+            setTimeout(() => {
+                registerWindowParent.style.opacity = 0;
+                setTimeout(() => {
+                    registerWindowParent.style.display = "none";
+                }, 200)
+              }, 200)
           } else {
-          showModal()
+            showModal()
           }
           }
         });
-</script>
-</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agon | Basket</title>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="manifest" href="./favicon/site.webmanifest">
+    <link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <!-- CSS styles -->
+    <link rel="stylesheet" href="./styles/basket.css">
+    <link rel="stylesheet" href="./styles/registration.css">
+</head>
+<body>
+<!-- Registration window -->
+<div class="registerWindowParent">
+    <div class="container">
+        <svg class="closeWindow" width="20" height="20" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z" fill="#333333"/>
+            <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z" fill="#333333"/>
+        </svg>
+
+        <div class="tabs">
+          <div id="btn"></div>
+          <button type="button" id="entrance" class="toggle-btn" onclick="login()">Log In</button>
+          <button type="button"  id="registration" class="toggle-btn" onclick="registrationn()">Register</button>
+        </div>
+    
+        <form id="entranceForm" class="form">
+          <input type="text" class="input-filed" id="entranceUsername" name="username" required placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ">
+          <input type="text" class="input-filed" placeholder="ПАРОЛЬ"  name="password" id="entrancePassword" required>
+          <input type="checkbox" class="check-box"><span>ЗАПОМНИТЬ МЕНЯ</span>
+          <button type="submit" class="submit-btn">ВОЙТИ</button>
+          <span id="entranceError"></span>
+        </form>  
+    
+        <form id="registForm" class="form">
+          <input type="text" class="input-filed" name="username" placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ" id="registUsername"  required>
+          <input type="text" class="input-filed" name="email" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" id="registEmail" required >
+          <input type="text" class="input-filed" name="password" placeholder="ПАРОЛЬ" id="registPassword" required >
+          <input type="checkbox" class="check-box"><span class="sogl">Я СОГЛАСЕН С МНЕНИЕМ МИЛАНЫ</span>
+          <button type="submit" class="submit-btn" >ЗАРЕГИСТРИРОВАТЬСЯ</button>
+        </form>
+      </div>
+
+
+
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>НЕВЕРНЫЙ ПАРОЛЬ</h2>
+          </div>
+          <div class="modal-body">
+            <p>ПАРОЛЬ ХЬАДАГ ДИЙХАЧ ХЬАВОАГ1АГ ВА ХЬО</p>
+          </div>
+          <div class="modal-footer">
+            <button class="modal-button">ЗАКРЫТЬ</button>
+          </div>
+        </div>
+      </div>
+</div>
+<!-- Registration window -->
+
+    <header>
+        <div class="user">
+            <img src="./mainImg/avatar.svg" class="avatar">
+            <span class="username"></span>
+        </div>
+        <nav>
+            <a href="./index.html">Home</a>
+            <a href="">About</a>
+            <a href="">Company</a>
+            <a href="">Pages</a>
+            <a href="">Shop</a>
+            <a href="./basket.html">Basket</a>
+        </nav>
+        <button class="getStartedHeadBtn">Get Started</button>
+    </header>
+
+    <main>
+        <img src="./basketImg/emptyBasketImg.svg" id="emptyBasketImg" />
+        <h2 id="emptyBasketH2">В вашей корзине пока пусто</h2>
+        <span id="emptyBasketSpan">Тут появятся товары, которые вы добавите</span>
+      </div>
+
+        <div class="productCardsСontainer"></div>
+    </main>
+    
+    <footer>
+        <div class="footerChildBlock">
+            <div class="footeBlock">
+                <h3>Contact</h3>
+                <p>
+                    4517 Washington Ave.
+                    Manchester, Kentucky 39495
+                </p>
+                <p>(239) 555-0108</p>
+                <a href="">contact@agon.com</a>
+                <div class="socialNetworks">
+                    <img src="./mainImg/facebookImg.svg" alt="">
+                    <img src="./mainImg/instagramImg.svg" alt="">
+                    <img src="./mainImg/twitterImg.svg" alt="">
+                    <img src="./mainImg/inImg.svg" alt="">
+                </div>
+            </div>
+            <div class="footeBlock">
+                <h3>About Us</h3>
+                <p>About V1</p>
+                <p>About V2</p>
+                <p>About V3</p>
+                <p>Services V1</p>
+                <p>Services V2</p>
+            </div>
+            <div class="footeBlock">
+                <h3>Discover</h3>
+                <p>Our Blog</p>
+                <p>Our Blog V1</p>
+                <p>Our Blog V2</p>
+                <p>Blog Single</p>
+                <p>Page 404</p>
+            </div>
+            <div class="footeBlock">
+                <h3>Support</h3>
+                <p>FAQs</p>
+                <p>FAQ V2</p>
+                <p>Career</p>
+                <p>Career Detail</p>
+                <p>Contact Us</p>
+            </div>
+            <div class="footeBlock">
+                <h3>Useful links</h3>
+                <p>Shop</p>
+                <p>Shop V2</p>
+                <p>Pricing V1</p>
+                <p>Pricing V2</p>
+                <p>Terms & Conditions</p>
+            </div>
+        </div>
+    </footer>
+    <div class="blockUnderFooter">
+        <h3>©Agon Official 2022</h3>
+        <div>
+            <span>Privacy policy</span>
+            <span>Cookies</span>
+            <span>Terms of service</span>
+        </div>
+    </div>
+
+    <script src="./scripts/basket.js"></script>
+</body>
+</html>

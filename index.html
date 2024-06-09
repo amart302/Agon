@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agon | Main</title>
+    <title>Agon | Home</title>
     <!-- Google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,20 +18,70 @@
     <meta name="theme-color" content="#ffffff">
     <!-- CSS styles -->
     <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/registration.css">
 </head>
 <body>
+    <!-- Registration window -->
+    <div class="registerWindowParent">
+        <div class="container">
+            <svg class="closeWindow" width="20" height="20" viewBox="0 0 23 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M2.09082 0.03125L22.9999 22.0294L20.909 24.2292L-8.73579e-05 2.23106L2.09082 0.03125Z" fill="#333333"/>
+                <path d="M0 22.0295L20.9091 0.0314368L23 2.23125L2.09091 24.2294L0 22.0295Z" fill="#333333"/>
+            </svg>
+
+            <div class="tabs">
+              <div id="btn"></div>
+              <button type="button" id="entrance" class="toggle-btn" onclick="login()">Log In</button>
+              <button type="button"  id="registration" class="toggle-btn" onclick="registrationn()">Register</button>
+            </div>
+        
+            <form id="entranceForm" class="form">
+              <input type="text" class="input-filed" id="entranceUsername" name="username" required placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ">
+              <input type="text" class="input-filed" placeholder="ПАРОЛЬ"  name="password" id="entrancePassword" required>
+              <input type="checkbox" class="check-box"><span>ЗАПОМНИТЬ МЕНЯ</span>
+              <button type="submit" class="submit-btn">ВОЙТИ</button>
+              <span id="entranceError"></span>
+            </form>  
+        
+            <form id="registForm" class="form">
+              <input type="text" class="input-filed" name="username" placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ" id="registUsername"  required>
+              <input type="text" class="input-filed" name="email" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" id="registEmail" required >
+              <input type="text" class="input-filed" name="password" placeholder="ПАРОЛЬ" id="registPassword" required >
+              <input type="checkbox" class="check-box"><span class="sogl">Я СОГЛАСЕН С МНЕНИЕМ МИЛАНЫ</span>
+              <button type="submit" class="submit-btn" >ЗАРЕГИСТРИРОВАТЬСЯ</button>
+            </form>
+          </div>
+    
+    
+    
+          <div id="modal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>НЕВЕРНЫЙ ПАРОЛЬ</h2>
+              </div>
+              <div class="modal-body">
+                <p>ПАРОЛЬ ХЬАДАГ ДИЙХАЧ ХЬАВОАГ1АГ ВА ХЬО</p>
+              </div>
+              <div class="modal-footer">
+                <button class="modal-button">ЗАКРЫТЬ</button>
+              </div>
+            </div>
+          </div>
+    </div>
+    <!-- Registration window -->
+
     <header>
         <div class="user">
             <img src="./mainImg/avatar.svg" class="avatar">
-            <span class="username">Agon</span>
+            <span class="username"></span>
         </div>
         <nav>
-            <a href="">Home</a>
+            <a href="./index.html">Home</a>
             <a href="">About</a>
             <a href="">Company</a>
             <a href="">Pages</a>
             <a href="">Shop</a>
-            <a href="">Basket</a>
+            <a href="./basket.html">Basket</a>
         </nav>
         <button class="getStartedHeadBtn">Get Started</button>
     </header>
@@ -215,7 +265,7 @@
         <div class="mainBlock7">
             <div class="user">
                 <img src="./mainImg/avatar.svg" class="avatar" style="width: 10%;">
-                <span class="username">Agon</span>
+                <span class="username"></span>
             </div>
             <div class="mainBlock7_podBlock1">
                 <p>Ready to get started?</p>
@@ -285,5 +335,6 @@
     </div>
 
     <script src="./scripts/main.js"></script>
+    <script src="./scripts/registration.js"></script>
 </body>
 </html>
