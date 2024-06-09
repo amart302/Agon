@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>регистрация</title>
+    <link rel="stylesheet" href="registration.css">
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+          <div id="btn"></div>
+          <button type="button" id="entrance" class="toggle-btn" onclick="login()">Log In</button>
+          <button type="button"  id="registration" class="toggle-btn" onclick="registrationn()">Register</button>
+        </div>
+    
+        <form id="entranceForm" class="form">
+          <input type="text" class="input-filed" id="entranceUsername" name="username" required placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ">
+          <input type="text" class="input-filed" placeholder="ПАРОЛЬ"  name="password" id="entrancePassword" required>
+          <input type="checkbox" class="check-box"><span>ЗАПОМНИТЬ МЕНЯ</span>
+          <button type="submit" class="submit-btn">ВОЙТИ</button>
+          <span id="entranceError"></span>
+        </form>  
+    
+        <form id="registForm" class="form">
+          <input type="text" class="input-filed" name="username" placeholder="ИМЯ ПОЛЬЗОВАТЕЛЯ" id="registUsername"  required>
+          <input type="text" class="input-filed" name="email" placeholder="ЭЛЕКТРОННАЯ ПОЧТА" id="registEmail" required >
+          <input type="text" class="input-filed" name="password" placeholder="ПАРОЛЬ" id="registPassword" required >
+          <input type="checkbox" class="check-box"><span class="sogl">Я СОГЛАСЕН С МНЕНИЕМ МИЛАНЫ</span>
+          <button type="submit" class="submit-btn" >ЗАРЕГЕСТИРОВАТЬСЯ</button>
+        </form>
+      </div>
+
+
+
+      <div id="modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2>НЕВЕРНЫЙ ПАРОЛЬ</h2>
+          </div>
+          <div class="modal-body">
+            <p>ПАРОЛЬ ХЬАДАГ ДИЙХАЧ ХЬАВОАГ1АГ ВА ХЬО</p>
+          </div>
+          <div class="modal-footer">
+            <button class="modal-button">ЗАКРЫТЬ</button>
+          </div>
+        </div>
+      </div>
+</body>
+<script>
+
+const modal = document.getElementById("modal");
+const modalButton = document.querySelector(".modal-button");
+
+// Показать модальное окно
+function showModal() {
+  modal.style.display = "block";
+}
+
+// Скрыть модальное окно
+function hideModal() {
+  modal.style.display = "none";
+}
+
+
+// Закрыть модальное окно по клику на кнопку "Закрыть"
+modalButton.addEventListener("click", hideModal);
+
+// Закрыть модальное окно по клику вне модального окна
+window.addEventListener("click", (event) => {
+  if (event.target == modal) {
+    hideModal();
+  }
+});
+
+
+
+
+
+
+var logIn = document.getElementById("entranceForm");
+var register = document.getElementById("registForm");
+var button = document.getElementById("btn");
+
+
+function registrationn() {
+  logIn.style.left = "-400px";
+  register.style.left = "50px";
+  button.style.left = "110px";
+}
+
+function login() {
+  logIn.style.left = "50px";
+  register.style.left = "450px";
+  button.style.left = "0";
+}
+
+
+const users = [];
+const registUsername = document.getElementById("registUsername");
+const registEmail = document.getElementById("registEmail");
+const registPassword = document.getElementById("registPassword");
+const registError = document.getElementById("registError");
+
+function addUser() {
+        const localUsers = JSON.parse(localStorage.getItem("users"));
+        let userName;
+        if (!localUsers) {
+          const userId = users.length;
+          const user = {
+            id: userId + 1,
+            username: registUsername.value,
+            email: registEmail.value,
+            password: registPassword.value,
+          };
+          users.push(user);
+          alert(`Регистрация успешна! \n \n Имя пользователя: ${registUsername.value} \n Email: ${registEmail.value}`);
+          userName = registUsername.value
+          
+          window.location.href = "./Main/main.html";
+          sessionStorage.setItem("username", userName);
+
+          localStorage.setItem("users", JSON.stringify(users));
+          registError.innerHTML = "";
+          entranceError.innerHTML = "";
+          document.getElementById("registForm").reset();
+          document.getElementById("entranceForm").reset();
+        } else {
+          const userId = localUsers.length;
+          const user = {
+            id: userId + 1,
+            username: registUsername.value,
+            email: registEmail.value,
+            password: registPassword.value,
+          };
+          localUsers.push(user);
+          alert(`Регистрация успешна! \n \n Имя пользователя: ${registUsername.value} \n Email: ${registEmail.value}`);
+          userName = registUsername.value
+
+          window.location.href = "./Main/main.html";
+          sessionStorage.setItem("username", userName);
+
+          localStorage.setItem("users", JSON.stringify(localUsers));
+          registError.innerHTML = "";
+          entranceError.innerHTML = "";
+          document.getElementById("registForm").reset();
+          document.getElementById("entranceForm").reset();
+        }
+      }
+      document.getElementById("registForm").addEventListener("submit", (event) => {
+          event.preventDefault();
+          const localUsers = JSON.parse(localStorage.getItem("users"));
+          if (!localUsers) {
+            addUser();
+          } else {
+            let checkUser = false;
+            for (let i = 0; i < localUsers.length; i++) {
+              if (localUsers[i].username == registUsername.value) {
+                alert( "Имя пользователя уже используется");
+                checkUser = true;
+              }
+            }
+            if (!checkUser) {
+              addUser();
+            }
+          }
+        });
+        const entranceUsername = document.getElementById("entranceUsername");
+      const entrancePassword = document.getElementById("entrancePassword");
+      const entranceError = document.getElementById("entranceError");
+
+      document.getElementById("entranceForm").addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          const localUsers = JSON.parse(localStorage.getItem("users"));
+          let checkUser = false;
+          let userName;
+          if (!localUsers) {
+            alert("Пользователь не найден");
+          } else {
+            for (let i = 0; i < localUsers.length; i++) {
+              if (
+                localUsers[i].username == entranceUsername.value &&
+                localUsers[i].password == entrancePassword.value
+              ) {
+                checkUser = true;
+                userName = entranceUsername.value;
+              }
+            }
+            if (checkUser) {
+            window.location.href = "./Main/main.html";
+            sessionStorage.setItem("username", userName);
+
+            entranceError.innerHTML = "";
+            registError.innerHTML = "";
+            document.getElementById("entranceForm").reset();
+            document.getElementById("registForm").reset();
+          } else {
+          showModal()
+          }
+          }
+        });
+</script>
+</html>
